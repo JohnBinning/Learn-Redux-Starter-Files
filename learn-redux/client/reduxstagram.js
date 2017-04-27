@@ -9,6 +9,23 @@ import css from './styles/style.styl'
 import App from './components/App'
 import Single from './components/Single'
 import PhotoGrid from './components/PhotoGrid'
+import Raven from 'raven-js'
+import { sentry_url, logException } from './data/config'
+
+Raven.config(sentry_url, {
+  tags: {
+    git_commit: 'asfas9d08f',
+    userLevel: 'editor'
+  }
+}).install();
+
+logException(new Error('download failed'), {
+  email: 'wesbos@gmail.com'
+});
+
+// Raven.captureMessage('so long');
+// Raven.showReportDialog();
+
 
 // import react router deps
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
